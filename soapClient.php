@@ -44,7 +44,7 @@ try{
 
 
     /*echo $recebe["dados"][0]["idatendimento".];*/
-    echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);
+    /*echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);*/
     /*var_dump($recebe["dados"][20]);*/
     /*print_r($recebe["dados"][0]["apelido"]);*/
 
@@ -60,8 +60,8 @@ try{
     };
     /*print_r($arrayTranform);
     /*var_dump($novoArray);*/
-
     foreach($arrayTranform as $percorre){
+        /*nao tem [idatendimentoorigem], [idatendimentogerado], [unidade]*/
         $idatendimento = (int) $percorre['idatendimento'];
         $codatendimento = (int) $percorre['codatendimento'];
         $codusuario = (int) $percorre['codusuario'];
@@ -72,24 +72,31 @@ try{
         $codempresa = (string) $percorre['codempresa'];
         $codigooriginal = (int) $percorre['codigooriginal'];
         $empresa = (string) $percorre['empresa'];
-        $datasolicitacao = (int) $percorre['datasolicitacao'];
+        $dataSolicitacao = date('Y-m-d', $percorre['datasolicitacao']);
+        $hrSolicitacao = date('H:i:s', $percorre['datasolicitacao']);
+        $dataAtendimento = date('Y-m-d', $percorre['dataatendimento']);
+        $hrAtendimento = date('H:i:s', $percorre['dataatendimento']);
+        $dataClienteSaiu = date('Y-m-d', $percorre['dataclientesaiu']);
+        $HrClienteSaiu = date('H:i:s', $percorre['dataclientesaiu']);
+        $dataFinalizacao = date('Y-m-d', $percorre['datafinalizacao']);
+        $hrFinalizacao = date('H:i:s', $percorre['datafinalizacao']);
+        $classificacao = (string) $percorre['classificacao'];
+        $departamento = (string) $percorre['departamento'];
         $avaliacao = (string) $percorre['avaliacao'];
         $codavaliacao = (string) $percorre['codavaliacao'];
         $iddepartamento = (int) $percorre['iddepartamento'];
-        $temp = (int) $percorre['tempo'];
-        $duracao = (int) $percorre['duracao'];
-
-        $query = "insert into dados(idatendimento, codatendimento, codusuario, apelido, codcliente, nome, email, codempresa, codigooriginal, empresa, datasolicitacao, avaliacao, codavaliacao, iddepartamento, tempo, duracao) values('".$idatendimento."', '".$codatendimento."', '".$codusuario."', '".$apelido."', '".$codcliente."', '".$nome."', '".$email."', '".$codempresa."', '".$codigooriginal."', '".$empresa."', '".$datasolicitacao."', '".$avaliacao."', '".$codavaliacao."', '".$iddepartamento."', '".$temp."', '".$duracao."')";
+        $tempo = gmdate ('H:i:s',$percorre['tempo']);
+        $duracao = gmdate ('H:i:s',$percorre['duracao']);
+        $query = "insert into dados(idatendimento, codatendimento, codusuario, apelido, codcliente, nome, email, codempresa, codigooriginal, empresa, dataSolicitacao,hrSolicitacao,dataAtendimento,hrAtendimento,dataClienteSaiu,HrClienteSaiu,dataFinalizacao,hrFinalizacao,classificacao,departamento, avaliacao, codavaliacao, iddepartamento, tempo, duracao) values('".$idatendimento."', '".$codatendimento."', '".$codusuario."', '".$apelido."', '".$codcliente."', '".$nome."', '".$email."', '".$codempresa."', '".$codigooriginal."', '".$empresa."', '".$dataSolicitacao."', '".$hrSolicitacao."', '".$dataAtendimento."', '".$hrAtendimento."', '".$dataClienteSaiu."', '".$HrClienteSaiu."', '".$dataFinalizacao."', '".$hrFinalizacao."', '".$classificacao."', '".$departamento."', '".$avaliacao."', '".$codavaliacao."', '".$iddepartamento."', '".$tempo."', '".$duracao."')";
         /*print_r(gettype($percorre['tempo']));*/
 
         $res = mysqli_query($conexao,$query);
-
         if($res){
             echo "inserido com sucesso";
         }else{
             echo"falha ao inserir";
         };
-    }
+    }echo $contador;
 
 
 
