@@ -42,9 +42,11 @@ try{
         $codempresa = (string) $percorre['codempresa'];
         $codigooriginal = (int) $percorre['codigooriginal'];
         $empresa = (string) $percorre['empresa'];
-        $dataSolicitacao = date('d-m-Y', $percorre['datasolicitacao']);
+        $dataSolicitacao = date('Y-m-d H:i:s', $percorre['datasolicitacao']);
+        $dataSolicitacaoCon = strtotime($dataSolicitacao);
         $hrSolicitacao = date('H:i:s', $percorre['datasolicitacao']);
-        $dataAtendimento = date('d-m-Y', $percorre['dataatendimento']);
+        $dataAtendimento = date('Y-m-d H:i:s', $percorre['dataatendimento']);
+        $dataAtendimentoCon = strtotime($dataAtendimento);
         $hrAtendimento = date('H:i:s', $percorre['dataatendimento']);
         $dataClienteSaiu = date('d-m-Y', $percorre['dataclientesaiu']);
         $HrClienteSaiu = date('H:i:s', $percorre['dataclientesaiu']);
@@ -58,9 +60,13 @@ try{
         $tempo = gmdate ('H:i:s',$percorre['tempo']);
         $duracao = gmdate ('H:i:s',$percorre['duracao']);
 
-        echo 'Data solicitacao: '.$dataSolicitacao.' Hora solicitacao: '.$hrSolicitacao.'<br><br>'.' data do atendimento: '.$dataAtendimento.'hora do atendimento:
+        $diferenca = $dataAtendimentoCon - $dataSolicitacaoCon;
+
+        /*echo 'Data solicitacao: '.$dataSolicitacao.' Hora solicitacao: '.$hrSolicitacao.'<br><br>'.' data do atendimento: '.$dataAtendimento.'hora do atendimento:
          '.$hrAtendimento.'<br><br> data cliente saiu:: '.$dataClienteSaiu.' hora cliente saiu: '.$HrClienteSaiu.'<br><br> data finalizacao: '.$dataFinalizacao.' hr finalizacao: '.$hrFinalizacao.'tempo: '.
-         $tempo.'duracao: '.$duracao.'<hr>';
+         $tempo.'duracao: '.$duracao.'<hr>';*/
+
+         echo 'data solicitacao: '.$dataSolicitacao.'<br>'.' data atendimento'.$dataAtendimento.'diferenteca: '.'<br><br>'.$diferenca.'<br>';
     }
 
 

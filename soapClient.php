@@ -30,7 +30,7 @@ try{
 
     $request->dados = new stdclass();
     $request->dados->atendimentoinicio = "2023/09/01"; // Data a ser consultada
-    $request->dados->atendimentofinal = $hoje; // Data a ser consultada
+    $request->dados->atendimentofinal = "2023/09/20"; // Data a ser consultada
     /*$request->dados->codclassificacao = "1";*/
 
 
@@ -44,7 +44,7 @@ try{
 
 
     /*echo $recebe["dados"][0]["idatendimento".];*/
-    /*echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);*/
+    echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);
     /*var_dump($recebe["dados"][20]);*/
     /*print_r($recebe["dados"][0]["apelido"]);*/
 
@@ -96,7 +96,7 @@ try{
         }else{
             echo"falha ao inserir";
         };
-    }echo $contador;
+    }
 
 
 
