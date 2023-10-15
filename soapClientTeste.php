@@ -19,7 +19,7 @@ try{
 
 
     $response = $client->obterListaIdentificado($request);
-    /*echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);*/
+    echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);
 
     $recebe = get_object_vars($response);
     $dados = $recebe["dados"];
@@ -60,7 +60,7 @@ try{
         $tempo = gmdate ('H:i:s',$percorre['tempo']);
         $duracao = gmdate ('H:i:s',$percorre['duracao']);
 
-        $diferenca = $dataAtendimentoCon - $dataSolicitacaoCon;
+        $diferenca = ($dataAtendimentoCon - $dataSolicitacaoCon)/60;
 
         /*echo 'Data solicitacao: '.$dataSolicitacao.' Hora solicitacao: '.$hrSolicitacao.'<br><br>'.' data do atendimento: '.$dataAtendimento.'hora do atendimento:
          '.$hrAtendimento.'<br><br> data cliente saiu:: '.$dataClienteSaiu.' hora cliente saiu: '.$HrClienteSaiu.'<br><br> data finalizacao: '.$dataFinalizacao.' hr finalizacao: '.$hrFinalizacao.'tempo: '.

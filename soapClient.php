@@ -29,8 +29,8 @@ try{
     $request->servicekey = $servicekey;
 
     $request->dados = new stdclass();
-    $request->dados->atendimentoinicio = "2023/09/01"; // Data a ser consultada
-    $request->dados->atendimentofinal = "2023/09/20"; // Data a ser consultada
+    $request->dados->atendimentoinicio = "2023/10/01"; // Data a ser consultada
+    $request->dados->atendimentofinal = "2023/10/15"; // Data a ser consultada
     /*$request->dados->codclassificacao = "1";*/
 
 
@@ -44,7 +44,7 @@ try{
 
 
     /*echo $recebe["dados"][0]["idatendimento".];*/
-    echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);
+    /*echo "<pre>" . $wsdl . "<br><br>" . print_r($response, true);*/
     /*var_dump($recebe["dados"][20]);*/
     /*print_r($recebe["dados"][0]["apelido"]);*/
 
@@ -73,9 +73,14 @@ try{
         $codigooriginal = (int) $percorre['codigooriginal'];
         $empresa = (string) $percorre['empresa'];
         $dataSolicitacao = date('Y-m-d', $percorre['datasolicitacao']);
+        
         $hrSolicitacao = date('H:i:s', $percorre['datasolicitacao']);
+        $hrSolicitacaoCon = strtotime($hrSolicitacao);
+        
         $dataAtendimento = date('Y-m-d', $percorre['dataatendimento']);
+        
         $hrAtendimento = date('H:i:s', $percorre['dataatendimento']);
+        $hrAtendimentoCon = strtotime($hrAtendimento);
         $dataClienteSaiu = date('Y-m-d', $percorre['dataclientesaiu']);
         $HrClienteSaiu = date('H:i:s', $percorre['dataclientesaiu']);
         $dataFinalizacao = date('Y-m-d', $percorre['datafinalizacao']);
@@ -87,7 +92,10 @@ try{
         $iddepartamento = (int) $percorre['iddepartamento'];
         $tempo = gmdate ('H:i:s',$percorre['tempo']);
         $duracao = gmdate ('H:i:s',$percorre['duracao']);
-        $query = "insert into dados(idatendimento, codatendimento, codusuario, apelido, codcliente, nome, email, codempresa, codigooriginal, empresa, dataSolicitacao,hrSolicitacao,dataAtendimento,hrAtendimento,dataClienteSaiu,HrClienteSaiu,dataFinalizacao,hrFinalizacao,classificacao,departamento, avaliacao, codavaliacao, iddepartamento, tempo, duracao) values('".$idatendimento."', '".$codatendimento."', '".$codusuario."', '".$apelido."', '".$codcliente."', '".$nome."', '".$email."', '".$codempresa."', '".$codigooriginal."', '".$empresa."', '".$dataSolicitacao."', '".$hrSolicitacao."', '".$dataAtendimento."', '".$hrAtendimento."', '".$dataClienteSaiu."', '".$HrClienteSaiu."', '".$dataFinalizacao."', '".$hrFinalizacao."', '".$classificacao."', '".$departamento."', '".$avaliacao."', '".$codavaliacao."', '".$iddepartamento."', '".$tempo."', '".$duracao."')";
+        $diferenca2 = $hrAtendimentoCon - $hrSolicitacaoCon;
+        /*$diferenca = gmdate('H:i:s',$diferenca2);*/
+        echo $diferenca2;
+        $query = "insert into dados(idatendimento, codatendimento, codusuario, apelido, codcliente, nome, email, codempresa, codigooriginal, empresa, dataSolicitacao,hrSolicitacao,dataAtendimento,hrAtendimento,dataClienteSaiu,HrClienteSaiu,dataFinalizacao,hrFinalizacao,classificacao,departamento, avaliacao, codavaliacao, iddepartamento, tempo, duracao, diferenca) values('".$idatendimento."', '".$codatendimento."', '".$codusuario."', '".$apelido."', '".$codcliente."', '".$nome."', '".$email."', '".$codempresa."', '".$codigooriginal."', '".$empresa."', '".$dataSolicitacao."', '".$hrSolicitacao."', '".$dataAtendimento."', '".$hrAtendimento."', '".$dataClienteSaiu."', '".$HrClienteSaiu."', '".$dataFinalizacao."', '".$hrFinalizacao."', '".$classificacao."', '".$departamento."', '".$avaliacao."', '".$codavaliacao."', '".$iddepartamento."', '".$tempo."', '".$duracao."','".$diferenca2."')";
         /*print_r(gettype($percorre['tempo']));*/
 
         $res = mysqli_query($conexao,$query);
